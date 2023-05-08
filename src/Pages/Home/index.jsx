@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Navvar from "../../Components/Navvar.jsx";
 
 function Home() {
   return (
-    <div>Home</div>
-  )
+    <>
+      <Navvar></Navvar>
+    </>
+  );
 }
 
-export default Home
+export default Home;
