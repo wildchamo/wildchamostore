@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import {ShopContext} from "../Context/index.jsx";
 
 function Navvar() {
+  const context = useContext(ShopContext);
   let activeStyle = "underline underline-offset-4";
 
   return (
@@ -92,7 +95,7 @@ function Navvar() {
             SignIn
           </NavLink>
         </li>
-        <li>🛒 0</li>
+        <li>🛒 {context.counter}</li>
       </ul>
     </nav>
   );
