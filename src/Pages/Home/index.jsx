@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 function Home() {
   const [items, setItems] = useState(null);
-  console.log(items);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
