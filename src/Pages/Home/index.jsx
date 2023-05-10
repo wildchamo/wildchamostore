@@ -1,5 +1,6 @@
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
+import ProductDetail from "../../Components/ProductDetail";
 import { useState, useEffect } from "react";
 
 function Home() {
@@ -12,7 +13,7 @@ function Home() {
   }, []);
   return (
     <Layout>
-      <section className="grid gap-4 grid-cols-4 w-full max-w-screen-xl">
+      <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
         {items?.map((item) => (
           <Card
             key={item.id}
@@ -23,6 +24,7 @@ function Home() {
           />
         ))}
       </section>
+      <ProductDetail />
     </Layout>
   );
 }
