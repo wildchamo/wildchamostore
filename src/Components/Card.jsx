@@ -3,13 +3,13 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 
-function Card({ category, image, price, title }) {
+function Card({ category, image, price, title,description }) {
   const context = useContext(ShopContext);
 
 
   const showProduct = () => {
     context.openProductD();
-    context.setFocusProduct({category, image, price, title});
+    context.setFocusProduct({category, image, price, title,description});
   };
 
   return (

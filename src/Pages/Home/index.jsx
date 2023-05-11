@@ -21,6 +21,7 @@ function Home() {
             image={item.image}
             title={item.title}
             price={item.price}
+            description={item.description}
           />
         ))}
       </section>

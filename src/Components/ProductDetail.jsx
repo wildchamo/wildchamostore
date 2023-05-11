@@ -19,8 +19,14 @@ function ProductDetail() {
         <h2 className="font-medium text-xl">Detail</h2>
         <XMarkIcon onClick={()=>{context.closeProductD()}} className="h-6 w-6 text-black hover:cursor-pointer" />
       </div>
-
-      <h1>{context.focusProduct.title}</h1>
+      <figure>
+        <img src={context.focusProduct.image}  alt="" />
+      </figure>
+      <p className="flex flex-col p-2">
+        <span className="font-medium text-2xl">{context.focusProduct.price}</span>
+        <span className="font-medium text-md">{context.focusProduct.title}</span>
+      <span className="font-light text-sm">{context.focusProduct.description}</span>
+      </p>
 
     </aside>
   );
