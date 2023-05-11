@@ -6,19 +6,25 @@ import { ShopContext } from "../Context/index.jsx";
 function Card({ category, image, price, title, description }) {
   const context = useContext(ShopContext);
 
-  const showProduct = () => {
-    context.openProductD();
-    context.setFocusProduct({ category, image, price, title, description });
-  };
-  const addCard = (title, price) => {
+  const addCard = (event,title, price) => {
+    event.stopPropagation();
+    context.openCheckOutSideOpen();
+    context.closeProductD();
     context.setCounter(context.counter + 1);
     context.setcardProducts([...context.cardProducts, { title, price }]);
   };
 
+  const showProduct = () => {
+    context.openProductD();
+    context.closeCheckOutSideOpen();
+    context.setFocusProduct({ category, image, price, title, description });
+  };
+
+
   return (
     <div
       className="bg-white cursor-pointer w-56 h-60"
-      onClick={(category, image, price, title) => showProduct()}
+      onClick={() => showProduct()}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-xs text-black px-3 py-0.5 m-2">
@@ -31,8 +37,8 @@ function Card({ category, image, price, title, description }) {
         />
         <section
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-5 h-5 rounded-full m-2"
-          onClick={() => {
-            addCard(title, price);
+          onClick={(event) => {
+            addCard(event,title, price);
           }}
         >
           <PlusIcon className="h-4 w-4 text-black hover:cursor-pointer" />

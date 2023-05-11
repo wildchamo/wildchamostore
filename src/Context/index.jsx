@@ -5,6 +5,7 @@ export const ShopContext = createContext();
 export const ShopContextProvider = ({ children }) => {
   const [counter, setCounter] = useState(0);
   const [isProductDOpen, setIsProductDOpen] = useState(false);
+  const [CheckOutSideOpen, setCheckOutSideOpen] = useState(false);
 
   const [focusProduct, setFocusProduct] = useState({});
   const [cardProducts, setcardProducts] = useState([]);
@@ -14,6 +15,12 @@ export const ShopContextProvider = ({ children }) => {
   };
   const closeProductD = () => {
     setIsProductDOpen(false);
+  };
+  const openCheckOutSideOpen = () => {
+    setCheckOutSideOpen(true);
+  };
+  const closeCheckOutSideOpen = () => {
+    setCheckOutSideOpen(false);
   };
 
   return (
@@ -28,6 +35,10 @@ export const ShopContextProvider = ({ children }) => {
         setFocusProduct,
         cardProducts,
         setcardProducts,
+
+        CheckOutSideOpen,
+        openCheckOutSideOpen,
+        closeCheckOutSideOpen
       }}
     >
       {children}

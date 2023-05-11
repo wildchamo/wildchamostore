@@ -3,3 +3,9 @@
   height: calc(100vh - 68px);
   top: 68px;
 }
+
+.checkOutSideMenu{
+  width: 330px;
+  height: calc(100vh - 68px);
+  top: 68px;
+}

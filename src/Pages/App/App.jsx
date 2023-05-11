@@ -6,6 +6,7 @@ import MyOrder from "../MyOrder/";
 import NotFound from "../NotFound/";
 import SignIn from "../SignIn/";
 import Navvar from "../../Components/Navvar.jsx";
+import CheckOutSideMenu from "../../Components/CheckOutSideMenu";
 import { ShopContextProvider } from "../../Context";
 
 import "./App.css";
@@ -46,6 +47,7 @@ function App() {
       <BrowserRouter>
         <AppRoutes />
         <Navvar />
+        <CheckOutSideMenu />
       </BrowserRouter>
     </ShopContextProvider>
   );
