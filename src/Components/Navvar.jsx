@@ -1,4 +1,5 @@
 import React from "react";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import {ShopContext} from "../Context/index.jsx";
@@ -95,7 +96,7 @@ function Navvar() {
             SignIn
           </NavLink>
         </li>
-        <li>🛒 {context.counter}</li>
+        <li className="flex flex-row gap-2"> <ShoppingCartIcon className="w-6 h-6 hover:cursor-pointer"/> {context.counter}</li>
       </ul>
     </nav>
   );
