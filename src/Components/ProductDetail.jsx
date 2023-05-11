@@ -11,14 +11,17 @@ function ProductDetail() {
     <aside
       className={` ${
         context.isProductDOpen
-          ? "productDetail flex flex-col fixed bg-white right-0 border border-black rounded-lg"
+          ? "productDetail flex flex-col fixed bg-white right-0 border border-black rounded-lg p-6"
           : "hidden"
       } `}
     >
-      <div className="flex justify-between items-center p-6">
+      <div className="flex justify-between items-center">
         <h2 className="font-medium text-xl">Detail</h2>
         <XMarkIcon onClick={()=>{context.closeProductD()}} className="h-6 w-6 text-black hover:cursor-pointer" />
       </div>
+
+      <h1>{context.focusProduct.title}</h1>
+
     </aside>
   );
 }
