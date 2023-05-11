@@ -7,6 +7,7 @@ export const ShopContextProvider = ({ children }) => {
   const [isProductDOpen, setIsProductDOpen] = useState(false);
 
   const [focusProduct, setFocusProduct] = useState({});
+  const [cardProducts, setcardProducts] = useState([]);
 
   const openProductD = () => {
     setIsProductDOpen(true);
@@ -25,6 +26,8 @@ export const ShopContextProvider = ({ children }) => {
         isProductDOpen,
         focusProduct,
         setFocusProduct,
+        cardProducts,
+        setcardProducts,
       }}
     >
       {children}

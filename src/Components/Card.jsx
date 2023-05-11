@@ -3,13 +3,16 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 
-function Card({ category, image, price, title,description }) {
+function Card({ category, image, price, title, description }) {
   const context = useContext(ShopContext);
-
 
   const showProduct = () => {
     context.openProductD();
-    context.setFocusProduct({category, image, price, title,description});
+    context.setFocusProduct({ category, image, price, title, description });
+  };
+  const addCard = (title, price) => {
+    context.setCounter(context.counter + 1);
+    context.setcardProducts([...context.cardProducts, { title, price }]);
   };
 
   return (
@@ -29,7 +32,7 @@ function Card({ category, image, price, title,description }) {
         <section
           className="absolute top-0 right-0 flex justify-center items-center bg-white w-5 h-5 rounded-full m-2"
           onClick={() => {
-            context.setCounter(context.counter + 1);
+            addCard(title, price);
           }}
         >
           <PlusIcon className="h-4 w-4 text-black hover:cursor-pointer" />
