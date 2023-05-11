@@ -6,12 +6,16 @@ import { ShopContext } from "../Context/index.jsx";
 function Card({ category, image, price, title }) {
   const context = useContext(ShopContext);
 
+
+  const showProduct = () => {
+    context.openProductD();
+    context.setFocusProduct({category, image, price, title});
+  };
+
   return (
     <div
       className="bg-white cursor-pointer w-56 h-60"
-      onClick={() => {
-        context.openProductD();
-      }}
+      onClick={(category, image, price, title) => showProduct()}
     >
       <figure className="relative mb-2 w-full h-4/5">
         <span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-xs text-black px-3 py-0.5 m-2">
