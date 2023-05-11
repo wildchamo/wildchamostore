@@ -2,6 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import OrderCard from "./OrderCard.jsx";
 import "./ProductDetail.css";
 
 function CheckOutSideMenu() {
@@ -17,9 +18,21 @@ function CheckOutSideMenu() {
     >
       <div className="flex justify-between items-center">
         <h2 className="font-medium text-xl">My order</h2>
-        <XMarkIcon onClick={()=>{context.closeCheckOutSideOpen()}} className="h-6 w-6 text-black hover:cursor-pointer" />
+        <XMarkIcon
+          onClick={() => {
+            context.closeCheckOutSideOpen();
+          }}
+          className="h-6 w-6 text-black hover:cursor-pointer"
+        />
       </div>
-
+      {context.cardProducts.map((product) => (
+        <OrderCard
+          key={product.title}
+          image={product.image}
+          price={product.price}
+          title={product.title}
+        />
+      ))}
     </aside>
   );
 }
