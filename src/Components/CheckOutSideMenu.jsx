@@ -3,15 +3,18 @@ import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import OrderCard from "./OrderCard.jsx";
+import { totalPrice } from "../utils/index.js";
 import "./ProductDetail.css";
 
 function CheckOutSideMenu() {
   const context = useContext(ShopContext);
 
   const removeElement = (title) => {
-    const filteredProduct= context.cardProducts.filter(product => product.title !== title)
-    context.setcardProducts(filteredProduct) 
-  }
+    const filteredProduct = context.cardProducts.filter(
+      (product) => product.title !== title
+    );
+    context.setcardProducts(filteredProduct);
+  };
 
   return (
     <aside
@@ -38,9 +41,14 @@ function CheckOutSideMenu() {
             price={product.price}
             title={product.title}
             removeElement={removeElement}
-            
           />
         ))}
+      </div>
+      <div>
+        <p className="flex justify-between items-center">
+          <span>Total:</span>
+          <span className="text-2xl font-medium">{totalPrice(context.cardProducts)}</span>
+        </p>
       </div>
     </aside>
   );
