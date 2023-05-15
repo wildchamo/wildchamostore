@@ -1,5 +1,5 @@
 import React from "react";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 
@@ -11,7 +11,10 @@ function Card({ category, image, price, title, description }) {
     context.openCheckOutSideOpen();
     context.closeProductD();
     context.setCounter(context.counter + 1);
-    context.setcardProducts([...context.cardProducts, { category, image, price, title, description }]);
+    context.setcardProducts([
+      ...context.cardProducts,
+      { category, image, price, title, description },
+    ]);
   };
 
   const showProduct = () => {
@@ -20,6 +23,35 @@ function Card({ category, image, price, title, description }) {
     context.setFocusProduct({ category, image, price, title, description });
   };
 
+  const renderIcon = (title) => {
+    const isInCart =
+      context.cardProducts.filter((product) => product.title === title).length >
+      0;
+
+    if (isInCart) {
+      return (
+        <section
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-5 h-5 rounded-full m-2"
+          onClick={(event) => {
+            addCard(event);
+          }}
+        >
+          <CheckIcon className="h-4 w-4 text-black" />
+        </section>
+      );
+    } else {
+      return (
+        <section
+          className="absolute top-0 right-0 flex justify-center items-center bg-white w-5 h-5 rounded-full m-2"
+          onClick={(event) => {
+            addCard(event);
+          }}
+        >
+          <PlusIcon className="h-4 w-4 text-black hover:cursor-pointer" />
+        </section>
+      );
+    }
+  };
 
   return (
     <div
@@ -35,14 +67,7 @@ function Card({ category, image, price, title, description }) {
           src={image}
           alt="headphones"
         />
-        <section
-          className="absolute top-0 right-0 flex justify-center items-center bg-white w-5 h-5 rounded-full m-2"
-          onClick={(event) => {
-            addCard(event);
-          }}
-        >
-          <PlusIcon className="h-4 w-4 text-black hover:cursor-pointer" />
-        </section>
+        {renderIcon(title)}
       </figure>
       <p className="flex justify-between">
         <span className="text-sm font-light">{title}</span>
