@@ -10,7 +10,6 @@ function Card({ category, image, price, title, description }) {
     event.stopPropagation();
     context.openCheckOutSideOpen();
     context.closeProductD();
-    context.setCounter(context.counter + 1);
     context.setcardProducts([
       ...context.cardProducts,
       { category, image, price, title, description },

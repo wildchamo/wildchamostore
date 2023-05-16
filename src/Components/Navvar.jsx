@@ -96,7 +96,7 @@ function Navvar() {
             SignIn
           </NavLink>
         </li>
-        <li className="flex flex-row gap-2"> <ShoppingCartIcon className="w-6 h-6 hover:cursor-pointer"/> {context.counter}</li>
+        <li className="flex flex-row gap-2"> <ShoppingCartIcon className="w-6 h-6 hover:cursor-pointer"/> {context.cardProducts.length}</li>
       </ul>
     </nav>
   );

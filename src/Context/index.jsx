@@ -3,12 +3,12 @@ import { createContext, useState } from "react";
 export const ShopContext = createContext();
 
 export const ShopContextProvider = ({ children }) => {
-  const [counter, setCounter] = useState(0);
   const [isProductDOpen, setIsProductDOpen] = useState(false);
   const [CheckOutSideOpen, setCheckOutSideOpen] = useState(false);
 
   const [focusProduct, setFocusProduct] = useState({});
   const [cardProducts, setcardProducts] = useState([]);
+  const [order, setOrder] = useState([]);
 
   const openProductD = () => {
     setIsProductDOpen(true);
@@ -26,8 +26,6 @@ export const ShopContextProvider = ({ children }) => {
   return (
     <ShopContext.Provider
       value={{
-        counter,
-        setCounter,
         openProductD,
         closeProductD,
         isProductDOpen,
@@ -38,7 +36,11 @@ export const ShopContextProvider = ({ children }) => {
 
         CheckOutSideOpen,
         openCheckOutSideOpen,
-        closeCheckOutSideOpen
+        closeCheckOutSideOpen,
+
+        //order
+        order,
+        setOrder,
       }}
     >
       {children}
