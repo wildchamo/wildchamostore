@@ -9,6 +9,7 @@ export const ShopContextProvider = ({ children }) => {
   const [focusProduct, setFocusProduct] = useState({});
   const [cardProducts, setcardProducts] = useState([]);
   const [order, setOrder] = useState([]);
+  console.log(order);
 
   const openProductD = () => {
     setIsProductDOpen(true);

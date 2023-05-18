@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../Context/index.jsx";
 import { XMarkIcon } from "@heroicons/react/24/solid";
@@ -8,6 +9,8 @@ import "./ProductDetail.css";
 
 function CheckOutSideMenu() {
   const context = useContext(ShopContext);
+
+  const navigate = useNavigate();
 
   const removeElement = (title) => {
     const filteredProduct = context.cardProducts.filter(
@@ -26,6 +29,7 @@ function CheckOutSideMenu() {
     context.setcardProducts([]);
 
     context.setOrder([...context.order, orderToAdd]);
+    navigate("/my-orders/last");
   };
 
   return (
@@ -57,7 +61,7 @@ function CheckOutSideMenu() {
         ))}
       </div>
       <div>
-        <p className="flex justify-between items-center">
+        <p className="flex justify-between items-center mb-2">
           <span>Total:</span>
           <span className="text-2xl font-medium">
            $ {totalPrice(context.cardProducts)}
