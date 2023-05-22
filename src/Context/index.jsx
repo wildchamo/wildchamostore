@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext();
 
@@ -9,7 +9,6 @@ export const ShopContextProvider = ({ children }) => {
   const [focusProduct, setFocusProduct] = useState({});
   const [cardProducts, setcardProducts] = useState([]);
   const [order, setOrder] = useState([]);
-  console.log(order);
 
   const openProductD = () => {
     setIsProductDOpen(true);
@@ -23,6 +22,31 @@ export const ShopContextProvider = ({ children }) => {
   const closeCheckOutSideOpen = () => {
     setCheckOutSideOpen(false);
   };
+
+  const [items, setItems] = useState(null);
+  const [filteredItems, setFilteredItems] = useState(null);
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
+
+  const [searchValue, setSearchValue] = useState("");
+
+  const filterItems = (items, searchVal) => {
+    return items?.filter((item) =>
+      item.title.toLowerCase().includes(searchVal.toLowerCase())
+    );
+  };
+
+  useEffect(() => {
+    if (searchValue) {
+      setFilteredItems(filterItems(items, searchValue));
+    }
+  }, [items, searchValue]);
+
+  console.log(filteredItems);
 
   return (
     <ShopContext.Provider
@@ -42,6 +66,11 @@ export const ShopContextProvider = ({ children }) => {
         //order
         order,
         setOrder,
+        items,
+        setItems,
+        searchValue,
+        setSearchValue,
+        filteredItems
       }}
     >
       {children}
