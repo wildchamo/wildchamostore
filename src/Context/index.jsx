@@ -33,6 +33,9 @@ export const ShopContextProvider = ({ children }) => {
   }, []);
 
   const [searchValue, setSearchValue] = useState("");
+  //search by category
+  const [searchByCategory, setSearchByCategory] = useState("");
+  console.log(searchByCategory);
 
   const filterItems = (items, searchVal) => {
     return items?.filter((item) =>
@@ -40,11 +43,20 @@ export const ShopContextProvider = ({ children }) => {
     );
   };
 
+  const filterItemsbyCategory = (items, category) => {
+    return items?.filter((item) =>
+      item.category.toLowerCase().includes(category.toLowerCase())
+    );
+  };
+
   useEffect(() => {
     if (searchValue) {
       setFilteredItems(filterItems(items, searchValue));
     }
-  }, [items, searchValue]);
+    if (searchByCategory) {
+      setFilteredItems(filterItemsbyCategory(items, searchByCategory));
+    }
+  }, [items, searchValue, searchByCategory ]);
 
   console.log(filteredItems);
 
@@ -70,7 +82,9 @@ export const ShopContextProvider = ({ children }) => {
         setItems,
         searchValue,
         setSearchValue,
-        filteredItems
+        filteredItems,
+        searchByCategory,
+        setSearchByCategory,
       }}
     >
       {children}
