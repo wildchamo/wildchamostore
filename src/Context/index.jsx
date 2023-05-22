@@ -49,14 +49,36 @@ export const ShopContextProvider = ({ children }) => {
     );
   };
 
-  useEffect(() => {
-    if (searchValue) {
+  const filterBy = (searchType, items, searchValue, searchByCategory) => {
+    if (searchType === "BY_TYTLE") {
       setFilteredItems(filterItems(items, searchValue));
     }
-    if (searchByCategory) {
-      setFilteredItems(filterItemsbyCategory(items, searchByCategory));
+    if (searchType === "BY_CATEGORY") {
+      return setFilteredItems(filterItemsbyCategory(items, searchByCategory));
     }
-  }, [items, searchValue, searchByCategory ]);
+    if (searchType === "BY_CATEGORY_AND_TITLE") {
+      return setFilteredItems(
+        filterItemsbyCategory(items, searchByCategory).filter((item) =>
+          item.title.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (searchValue && !searchByCategory) {
+      filterBy("BY_TYTLE", items, searchValue, searchByCategory);
+    }
+    if (searchByCategory && !searchValue) {
+      filterBy("BY_CATEGORY", items, searchValue, searchByCategory);
+    }
+    if (searchByCategory && searchValue) {
+      filterBy("BY_CATEGORY_AND_TITLE", items, searchValue, searchByCategory);
+    }
+    if (!searchByCategory && !searchValue) {
+      filterBy(null);
+    }
+  }, [items, searchValue, searchByCategory]);
 
   console.log(filteredItems);
 
