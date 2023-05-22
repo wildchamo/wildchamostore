@@ -6,10 +6,16 @@ import { ShopContext } from "../../Context/index.jsx";
 import OrderCard from "../../Components/OrderCard";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
-
 function MyOrder() {
   const context = useContext(ShopContext);
-  console.log(context.order.slice(-1)[0].products);
+  // console.log(context.order.slice(-1)[0].products);
+
+  const currentPath = window.location.pathname;
+  let index = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+
+  if (index === "last") {
+    index = context.order?.length - 1;
+  }
 
   return (
     <Layout>
@@ -20,7 +26,7 @@ function MyOrder() {
         <h1 className="text-lg font-bold">My Order</h1>
       </div>
       <div className="flex flex-col w-80">
-        {context.order?.slice(-1)[0].products.map((product) => (
+        {context.order?.[index]?.products.map((product) => (
           <OrderCard
             key={product.title}
             image={product.image}
