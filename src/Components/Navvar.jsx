@@ -12,7 +12,6 @@ function Navvar() {
   const signoutStorage = localStorage.getItem("signout");
   const parsedSignout = JSON.parse(signoutStorage);
   const isusersignout = parsedSignout || context.signout;
-
   const handleSignOut = () => {
     const stringifiedSignout = JSON.stringify(true);
     localStorage.setItem("signout", stringifiedSignout);
@@ -145,8 +144,7 @@ function Navvar() {
           }}
           className="flex flex-row gap-2"
         >
-          {" "}
-          <ShoppingCartIcon className="w-6 h-6 hover:cursor-pointer" />{" "}
+          <ShoppingCartIcon className="w-6 h-6 hover:cursor-pointer" />
           {context.cardProducts.length}
         </li>
       </ul>
