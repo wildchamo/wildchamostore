@@ -28,8 +28,10 @@ function CheckOutSideMenu() {
     };
     context.setcardProducts([]);
 
+    context.setSearchValue("");
     context.setOrder([...context.order, orderToAdd]);
     navigate("/my-orders/last");
+
   };
 
   return (

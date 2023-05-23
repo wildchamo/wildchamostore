@@ -8,7 +8,6 @@ import { ShopContext } from "../../Context/index.jsx";
 
 function MyOrders() {
   const context = useContext(ShopContext);
-  console.log(context.order);
 
   return (
     <Layout>

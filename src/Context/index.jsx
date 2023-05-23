@@ -35,7 +35,6 @@ export const ShopContextProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState("");
   //search by category
   const [searchByCategory, setSearchByCategory] = useState("");
-  console.log(searchByCategory);
 
   const filterItems = (items, searchVal) => {
     return items?.filter((item) =>
@@ -50,6 +49,9 @@ export const ShopContextProvider = ({ children }) => {
   };
 
   const filterBy = (searchType, items, searchValue, searchByCategory) => {
+    if (!searchType) {
+      return setFilteredItems(items);
+    }
     if (searchType === "BY_TYTLE") {
       setFilteredItems(filterItems(items, searchValue));
     }
@@ -71,16 +73,17 @@ export const ShopContextProvider = ({ children }) => {
     }
     if (searchByCategory && !searchValue) {
       filterBy("BY_CATEGORY", items, searchValue, searchByCategory);
+ 
     }
     if (searchByCategory && searchValue) {
       filterBy("BY_CATEGORY_AND_TITLE", items, searchValue, searchByCategory);
     }
     if (!searchByCategory && !searchValue) {
-      filterBy(null);
+      filterBy(false, items);
     }
+
   }, [items, searchValue, searchByCategory]);
 
-  console.log(filteredItems);
 
   return (
     <ShopContext.Provider

@@ -1,7 +1,6 @@
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Card";
 import ProductDetail from "../../Components/ProductDetail";
-import { useState } from "react";
 import { useContext } from "react";
 import { ShopContext } from "../../Context/index.jsx";
 
@@ -9,29 +8,25 @@ function Home() {
   const context = useContext(ShopContext);
 
   const renderView = () => {
-    if (context.searchValue?.length > 0 || context.searchByCategory?.length > 0) {
-      if (context.filteredItems?.length === 0) {
-        return <p>We dont have an element that correspond to ur search :C</p>;
-      } else {
-        return (
-          <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-            {context.filteredItems?.map((item) => (
-              <Card
-                key={item.id}
-                category={item.category}
-                image={item.image}
-                title={item.title}
-                price={item.price}
-                description={item.description}
-              />
-            ))}
-          </section>
-        );
-      }
+    if (context.filteredItems?.length > 0) {
+      return (
+        <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+          {context.filteredItems?.map((item) => (
+            <Card
+              key={item.id}
+              category={item.category}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+              description={item.description}
+            />
+          ))}
+        </section>
+      );
     } else {
       return (
         <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
-          {context.items?.map((item) => (
+          {context.filteredItems?.map((item) => (
             <Card
               key={item.id}
               category={item.category}

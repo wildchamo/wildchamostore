@@ -12,7 +12,13 @@ function Navvar() {
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-md font-light">
       <ul className="flex items-center gap-3">
         <li className="font-bold">
-          <NavLink to="/" onClick={() => context.setSearchByCategory()}>
+          <NavLink
+            to="/"
+            onClick={() => {
+              context.setSearchByCategory();
+              context.setSearchValue("");
+            }}
+          >
             Wildchamo Store
           </NavLink>
         </li>
@@ -20,7 +26,10 @@ function Navvar() {
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            onClick={() => context.setSearchByCategory()}
+            onClick={() => {
+              context.setSearchByCategory();
+              context.setSearchValue("");
+            }}
           >
             All
           </NavLink>
@@ -29,7 +38,10 @@ function Navvar() {
           <NavLink
             to="/clothes"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            onClick={() => context.setSearchByCategory("clothing")}
+            onClick={() => {
+              context.setSearchByCategory("clothing");
+              context.setSearchValue("");
+            }}
           >
             Clothes
           </NavLink>
@@ -38,7 +50,10 @@ function Navvar() {
           <NavLink
             to="/electronics"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            onClick={() => context.setSearchByCategory("electronics")}
+            onClick={() => {
+              context.setSearchByCategory("electronics");
+              context.setSearchValue("");
+            }}
           >
             Electronics
           </NavLink>
@@ -47,8 +62,11 @@ function Navvar() {
           <NavLink
             to="/jewelery"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            onClick={() => context.setSearchByCategory("jewelery")}
-          >
+            onClick={() => {
+              context.setSearchByCategory("jewelery");
+              context.setSearchValue("");
+            }}
+         >
             Jewelery
           </NavLink>
         </li>
