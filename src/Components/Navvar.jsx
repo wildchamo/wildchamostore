@@ -8,11 +8,71 @@ function Navvar() {
   const context = useContext(ShopContext);
   let activeStyle = "underline underline-offset-4";
 
-  const handleSignOut= ()=>{
+  //signout
+  const signoutStorage = localStorage.getItem("signout");
+  const parsedSignout = JSON.parse(signoutStorage);
+  const isusersignout = parsedSignout || context.signout;
+
+  const handleSignOut = () => {
     const stringifiedSignout = JSON.stringify(true);
     localStorage.setItem("signout", stringifiedSignout);
     context.setSignout(true);
-  }
+  };
+
+  const renderView = () => {
+    if (isusersignout) {
+      return (
+        <li>
+          <NavLink
+            to="/sign-in"
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Sign in
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <>
+          <li>
+            <NavLink
+              to="/my-orders"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-account"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Account
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-order"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              My Order
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/sign-in"
+              className={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={() => {
+                handleSignOut();
+              }}
+            >
+              Sign Out
+            </NavLink>
+          </li>
+        </>
+      );
+    }
+  };
 
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-md font-light bg-white">
@@ -78,39 +138,7 @@ function Navvar() {
         </li>
       </ul>
       <ul className="flex items-center gap-3">
-        <li>
-          <NavLink
-            to="/my-orders"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            My Orders
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/my-account"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            My Account
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/my-order"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            My Order
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/sign-in"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-            onClick={()=>{handleSignOut()}}
-          >
-            Sign Out
-          </NavLink>
-        </li>
+        {renderView()}
         <li
           onClick={() => {
             context.openCheckOutSideOpen();
