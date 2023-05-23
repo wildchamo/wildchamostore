@@ -24,8 +24,8 @@ export const ShopContextProvider = ({ children }) => {
   }
 
   //Estado del inicio de sesión
-  const [account, setAccount] = useState(parsedAccount);
-  const [signout, setSignout] = useState(parsedSignout);
+  const [account, setAccount] = useState({});
+  const [signout, setSignout] = useState(false);
   //
 
   const [isProductDOpen, setIsProductDOpen] = useState(false);
@@ -110,6 +110,12 @@ export const ShopContextProvider = ({ children }) => {
   return (
     <ShopContext.Provider
       value={{
+        //account
+        account,
+        setAccount,
+        signout,
+        setSignout,
+
         openProductD,
         closeProductD,
         isProductDOpen,

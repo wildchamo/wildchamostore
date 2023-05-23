@@ -8,6 +8,12 @@ function Navvar() {
   const context = useContext(ShopContext);
   let activeStyle = "underline underline-offset-4";
 
+  const handleSignOut= ()=>{
+    const stringifiedSignout = JSON.stringify(true);
+    localStorage.setItem("signout", stringifiedSignout);
+    context.setSignout(true);
+  }
+
   return (
     <nav className="flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-md font-light bg-white">
       <ul className="flex items-center gap-3">
@@ -100,8 +106,9 @@ function Navvar() {
           <NavLink
             to="/sign-in"
             className={({ isActive }) => (isActive ? activeStyle : undefined)}
+            onClick={()=>{handleSignOut()}}
           >
-            SignIn
+            Sign Out
           </NavLink>
         </li>
         <li
