@@ -7,10 +7,16 @@ import { ShopContext } from "../../Context/index.jsx";
 function Home() {
   const context = useContext(ShopContext);
 
+  const currentPath = window.location.pathname;
+  let url = currentPath.substring(currentPath.lastIndexOf("/") + 1);
+  if(url===""){
+    url="Exclusive products"
+  }
+
   const renderView = () => {
     if (context.filteredItems?.length > 0) {
       return (
-        <section className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+        <section className="grid gap-4 grid-cols-2 items-center md:grid-cols-4 w-full max-w-screen-lg">
           {context.filteredItems?.map((item) => (
             <Card
               key={item.id}
@@ -44,7 +50,7 @@ function Home() {
   return (
     <Layout>
       <div className="flex w-80 justify-center relative items-center">
-        <h1 className="font-medium text-xl mb-4">Exclusive Products</h1>
+        <h1 className="font-medium text-xl mb-4">{url}</h1>
       </div>
       <input
         value={context.searchValue}

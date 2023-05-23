@@ -3,6 +3,31 @@ import { createContext, useState, useEffect } from "react";
 export const ShopContext = createContext();
 
 export const ShopContextProvider = ({ children }) => {
+  //consumo localstorage
+  const accountStorage = localStorage.getItem("account");
+  const signoutStorage = localStorage.getItem("signout");
+  let parsedAccount;
+  let parsedSignout;
+
+  if (!accountStorage) {
+    localStorage.setItem("account", JSON.stringify({}));
+    parsedAccount = {};
+  } else {
+    parsedAccount = JSON.parse(accountStorage);
+  }
+
+  if (!signoutStorage) {
+    localStorage.setItem("signout", JSON.stringify(false));
+    parsedSignout = false;
+  } else {
+    parsedSignout = JSON.parse(signoutStorage);
+  }
+
+  //Estado del inicio de sesión
+  const [account, setAccount] = useState(parsedAccount);
+  const [signout, setSignout] = useState(parsedSignout);
+  //
+
   const [isProductDOpen, setIsProductDOpen] = useState(false);
   const [CheckOutSideOpen, setCheckOutSideOpen] = useState(false);
 
@@ -73,7 +98,6 @@ export const ShopContextProvider = ({ children }) => {
     }
     if (searchByCategory && !searchValue) {
       filterBy("BY_CATEGORY", items, searchValue, searchByCategory);
- 
     }
     if (searchByCategory && searchValue) {
       filterBy("BY_CATEGORY_AND_TITLE", items, searchValue, searchByCategory);
@@ -81,9 +105,7 @@ export const ShopContextProvider = ({ children }) => {
     if (!searchByCategory && !searchValue) {
       filterBy(false, items);
     }
-
   }, [items, searchValue, searchByCategory]);
-
 
   return (
     <ShopContext.Provider

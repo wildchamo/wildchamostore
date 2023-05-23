@@ -31,6 +31,7 @@ function CheckOutSideMenu() {
     context.setSearchValue("");
     context.setOrder([...context.order, orderToAdd]);
     navigate("/my-orders/last");
+    context.closeCheckOutSideOpen()
 
   };
 
