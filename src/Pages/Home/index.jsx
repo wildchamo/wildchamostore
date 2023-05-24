@@ -53,7 +53,7 @@ function Home() {
         <h1 className="font-medium text-xl mb-4">{url}</h1>
       </div>
       <input
-        value={context.searchValue}
+        defaultValue={context.searchValue}
         onChange={(event) => {
           // console.log(event.target.value);
           context.setSearchValue(event.target.value);

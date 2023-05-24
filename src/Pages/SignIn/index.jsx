@@ -8,6 +8,8 @@ function SignIn() {
   const context = useContext(ShopContext);
   const [view, setView] = useState("userInfo");
 
+  console.log(view)
+
   //account
   const account = localStorage.getItem("account");
   const parsedaccount = JSON.parse(account);
@@ -25,7 +27,10 @@ function SignIn() {
     const stringifiedSignout = JSON.stringify(false);
     localStorage.setItem("signout", stringifiedSignout);
     context.setSignout(false);
+    context.setAccount(parsedaccount);
   };
+
+
   const createAccount = () => {
     event.preventDefault();
     const formData = new FormData(form.current);
@@ -36,6 +41,7 @@ function SignIn() {
     };
     const stringifiedAccount = JSON.stringify(data);
     localStorage.setItem("account", stringifiedAccount);
+    context.setAccount(data);
     console.log(data);
   };
 
@@ -65,7 +71,7 @@ function SignIn() {
         <button
           onClick={() => setView("create-user-info")}
           className="bg-white disabled:bg-white/40 text-black border border-black w-full rounded-lg py-3 mt-4 mb-2 hover:cursor-pointer"
-          disabled={hasUserAccount}
+          // disabled={hasUserAccount}
         >
           Sign up
         </button>
@@ -123,13 +129,16 @@ function SignIn() {
         <button
           onClick={() => setView("userInfo")}
           className="bg-white disabled:bg-white/40 text-black border border-black w-full rounded-lg py-3 mt-4 mb-2 hover:cursor-pointer"
-          disabled={hasUserAccount}
+          // disabled={hasUserAccount}
         >
           Login
         </button>
       </form>
     );
   };
+
+
+  
   //conditional rendering
   const renderView = () =>
     view === "create-user-info" ? renderCreateUserInfo() : renderLogIn();

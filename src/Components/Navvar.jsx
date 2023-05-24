@@ -12,27 +12,30 @@ function Navvar() {
   const signoutStorage = localStorage.getItem("signout");
   const parsedSignout = JSON.parse(signoutStorage);
   const isusersignout = parsedSignout || context.signout;
+
   const handleSignOut = () => {
     const stringifiedSignout = JSON.stringify(true);
     localStorage.setItem("signout", stringifiedSignout);
     context.setSignout(true);
   };
 
+  const account = localStorage.getItem("account");
+  const parsedAccount = JSON.parse(account);
+  const noAccountInLocalStorage = parsedAccount
+    ? Object.keys(parsedAccount).length === 0
+    : true;
+  const noAccountInLocalSate = context.account
+    ? Object.keys(context.account).length === 0
+    : true;
+  const hasUserAccount = !noAccountInLocalStorage || !noAccountInLocalSate;
+
   const renderView = () => {
-    if (isusersignout) {
-      return (
-        <li>
-          <NavLink
-            to="/sign-in"
-            className={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Sign in
-          </NavLink>
-        </li>
-      );
-    } else {
+    if (hasUserAccount && !isusersignout) {
       return (
         <>
+        <li className="text-black/60">
+          {parsedAccount?.email}
+        </li>
           <li>
             <NavLink
               to="/my-orders"
@@ -70,6 +73,17 @@ function Navvar() {
           </li>
         </>
       );
+    } else {
+      return (
+        <li>
+          <NavLink
+            to="/sign-in"
+            className={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Sign in
+          </NavLink>
+        </li>
+      );
     }
   };
 
@@ -78,7 +92,7 @@ function Navvar() {
       <ul className="flex items-center gap-3">
         <li className="font-bold">
           <NavLink
-            to="/"
+            to={`${isusersignout ? "/sign-in" : "/"}`}
             onClick={() => {
               context.setSearchByCategory();
               context.setSearchValue("");

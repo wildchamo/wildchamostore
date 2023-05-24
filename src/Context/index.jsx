@@ -25,9 +25,8 @@ export const ShopContextProvider = ({ children }) => {
 
   //Estado del inicio de sesión
   const [account, setAccount] = useState({});
-  const [signout, setSignout] = useState(false);
+  const [signout, setSignout] = useState();
   //
-
   const [isProductDOpen, setIsProductDOpen] = useState(false);
   const [CheckOutSideOpen, setCheckOutSideOpen] = useState(false);
 
